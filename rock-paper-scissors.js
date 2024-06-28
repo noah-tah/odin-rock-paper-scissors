@@ -17,4 +17,20 @@ function getComputerChoice(randNum) {
 
 getComputerChoice(getRandomInt(3));
 
-// new change
+function getHumanChoice(choice) {
+    let formattedChoice = choice.toLowerCase();
+    if (choice === "rock") {
+        console.log("rock selected");
+    } else if (choice === "paper") {
+        console.log("paper selected");
+    } else if (choice ===  "scissors") {
+        console.log("scissors selected");
+    } else {
+        console.log("Somehow you messed up")
+    }
+}
+
+console.log(getHumanChoice(prompt("Please choose rock, paper or scissors: ")));
+
+
+// new new change
