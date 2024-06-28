@@ -16,3 +16,5 @@ function getComputerChoice(randNum) {
 }
 
 getComputerChoice(getRandomInt(3));
+
+// new change
