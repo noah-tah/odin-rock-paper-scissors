@@ -12,7 +12,7 @@ function getHumanChoice(choice) {
         console.log("You chose: Paper.")
         return "paper";
     } else if (choice ===  "scissors") {
-        console.log("You chose: Paper.")
+        console.log("You chose: Scissors.")
         return "scissors";
     } else {
         console.log("Invalid input! Please enter rock, paper, or scissors!");
@@ -41,7 +41,6 @@ let computerChoice = getComputerChoice(getRandomInt(3));
 
 let computerScore = 0;
 let playerScore = 0;
-// TODO: code for edge case when player and computer both choose same move
 function playRound(humanChoice, computerChoice) {
 
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
