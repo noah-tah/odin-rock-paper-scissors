@@ -43,7 +43,14 @@ let computerScore = 0;
 let playerScore = 0;
 // TODO: code for edge case when player and computer both choose same move
 function playRound(humanChoice, computerChoice) {
-    if ( humanChoice === "rock" && computerChoice != "paper") {
+
+    if ( humanChoice === "rock" && computerChoice === "rock" ) {
+        console.log("Tie! Human and computer chose: Rock!");
+    } else if ( humanChoice ==="paper" && computerChoice === "paper" ) {
+        console.log("Tie! Human and computer chose: Paper!");
+    } else if ( humanChoice ==="scissors" && computerChoice === "scissors" ) {
+        console.log("Somehow you messed up.");
+    } else if ( humanChoice === "rock" && computerChoice != "paper") {
         console.log("You win! Rock beats Scissors!");
         return "winner";
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
@@ -62,7 +69,7 @@ function playRound(humanChoice, computerChoice) {
         console.log("You lose! Scissors beats paper!");
         return "loser";
     } else {
-        console.log("Somehow you messed up.");
+        console.log("Somehow you messed up!");
     }
 }
 
