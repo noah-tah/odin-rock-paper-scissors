@@ -41,23 +41,47 @@ let computerChoice = getComputerChoice(getRandomInt(3));
 
 let computerScore = 0;
 let playerScore = 0;
-
+// TODO: code for edge case when player and computer both choose same move
 function playRound(humanChoice, computerChoice) {
     if ( humanChoice === "rock" && computerChoice != "paper") {
         console.log("You win! Rock beats Scissors!");
+        return "winner";
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
         console.log("You win! Paper beats Rock!");
+        return "winner";
     } else if ( humanChoice === "scissors" && computerChoice != "rock" ) {
         console.log("You win! Scissors beats Paper!");
+        return "winner";
     } else if ( computerChoice === "rock" && humanChoice === "scissors!" ) {
         console.log("You lose! Rock beats Scissors!");
+        return "loser";
     } else if ( computerChoice === "paper" && humanChoice === "rock" ) {
         console.log("You lose! Paper beats Rock!");
+        return "loser";
     } else if ( computerChoice === "scissors" && humanChoice === "paper" ) {
         console.log("You lose! Scissors beats paper!");
+        return "loser";
     } else {
         console.log("Somehow you messed up.");
     }
 }
 
-playRound(humanChoice, computerChoice);
+let winnerOrLoser = playRound(humanChoice, computerChoice);
+
+// TODO: Increment score after a round is played
+// TODO: for some reason current computerChoice is getting stored into computerScore
+function adjustScore(winnerOrLoser, playerScore, computerScore) {
+    if ( winnerOrLoser === "winner" ) {
+        playerScore = playerScore + 1;
+        console.log("Player's current score: ", playerScore);
+        console.log("Computer's current score: ", computerScore);
+    } else if ( winnerOrLoser === "loser" ) {
+        computerScore = computerScore + 1;
+        console.log("Player's current score: ", playerScore);
+        console.log("Computer's current score: ", computerScore);
+    } else {
+        console.log("Somehow you messed up calculating score");
+    }
+}
+
+adjustScore(winnerOrLoser, playerScore, computerChoice);
