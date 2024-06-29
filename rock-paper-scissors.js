@@ -12,7 +12,7 @@ function getHumanChoice(choice) {
         console.log("You chose: Paper.")
         return "paper";
     } else if (choice ===  "scissors") {
-        console.log("You chose: Scissors.")
+        console.log("You chose: Scissors.");
         return "scissors";
     } else {
         console.log("Invalid input! Please enter rock, paper, or scissors!");
@@ -79,15 +79,21 @@ let winnerOrLoser = playRound(humanChoice, computerChoice);
 function adjustScore(winnerOrLoser, playerScore, computerScore) {
     if ( winnerOrLoser === "winner" ) {
         playerScore = playerScore + 1;
+        console.log("Since the Human won, the current score is: ");
         console.log("Player's current score: ", playerScore);
         console.log("Computer's current score: ", computerScore);
     } else if ( winnerOrLoser === "loser" ) {
         computerScore = computerScore + 1;
+        console.log("Since the Human lost, the current score is: ");
         console.log("Player's current score: ", playerScore);
         console.log("Computer's current score: ", computerScore);
     } else {
-        console.log("Somehow you messed up calculating score");
+        console.log("Since it was a tie, the current score is: ");
+        console.log("Player score: ", playerScore);
+        console.log("Computer score: ", computerScore);
     }
 }
 
-adjustScore(winnerOrLoser, playerScore, computerChoice);
+adjustScore(winnerOrLoser, playerScore, computerScore);
+
+
