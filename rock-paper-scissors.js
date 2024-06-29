@@ -3,9 +3,8 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-
 function getHumanChoice(choice) {
-    let formattedChoice = choice.toLowerCase();
+    choice = choice.toLowerCase(); // convert choice to lowercase
     if (choice === "rock") {
         console.log("You chose: Rock.")
         return "rock";
@@ -37,6 +36,7 @@ function getComputerChoice(randNum) {
 
 
 let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
+
 let computerChoice = getComputerChoice(getRandomInt(3));
 
 let computerScore = 0;
