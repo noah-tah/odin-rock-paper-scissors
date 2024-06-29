@@ -5,32 +5,35 @@ function getRandomInt(max) {
 
 function getComputerChoice(randNum) {
     if (randNum === 0) {
-        console.log("Rock");
+        return "rock";
     } else if (randNum === 1) {
-        console.log("Paper");
+        return "paper";
     } else if (randNum === 2) {
-        console.log("Scissors");
-    } else {
-        console.log("Somehow you messed up")
+        return "scissors"
+     } else {
+        console.log("Somehow the computer choice function failed");
     }
 }
 
-getComputerChoice(getRandomInt(3));
 
 function getHumanChoice(choice) {
     let formattedChoice = choice.toLowerCase();
     if (choice === "rock") {
-        console.log("rock selected");
+        return "rock";
     } else if (choice === "paper") {
-        console.log("paper selected");
+        return "paper";
     } else if (choice ===  "scissors") {
-        console.log("scissors selected");
+        return "scissors";
     } else {
-        console.log("Somehow you messed up")
+        console.log("Invalid input! Please enter rock, paper, or scissors!");
     }
 }
 
-console.log(getHumanChoice(prompt("Please choose rock, paper or scissors: ")));
+let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
+let computerChoice = getComputerChoice(getRandomInt(3));
 
+let computerScore = 0;
+let playerScore = 0;
 
-// new new change
+function playRound(humanChoice, computerChoice) {
+}
