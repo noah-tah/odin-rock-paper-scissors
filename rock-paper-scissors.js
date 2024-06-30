@@ -1,4 +1,6 @@
 //  test section
+
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -34,15 +36,9 @@ function getComputerChoice(randNum) {
     }
 }
 
-
-let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
-
-let computerChoice = getComputerChoice(getRandomInt(3));
-
-let computerScore = 0;
-let playerScore = 0;
+// TODO: Increment score after a round is played
+// TODO: for some reason current computerChoice is getting stored into computerScore
 function playRound(humanChoice, computerChoice) {
-
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
         console.log("Tie! Human and computer chose: Rock!");
     } else if ( humanChoice ==="paper" && computerChoice === "paper" ) {
@@ -51,49 +47,71 @@ function playRound(humanChoice, computerChoice) {
         console.log("Somehow you messed up.");
     } else if ( humanChoice === "rock" && computerChoice != "paper") {
         console.log("You win! Rock beats Scissors!");
-        return "winner";
+        playerScore++; // maybe i should return something then capture the value outside of the function
+        // return "winner";
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
         console.log("You win! Paper beats Rock!");
-        return "winner";
+        playerScore++;
+        // return "winner";
     } else if ( humanChoice === "scissors" && computerChoice != "rock" ) {
         console.log("You win! Scissors beats Paper!");
-        return "winner";
+        playerScore++;
+        // return "winner";
     } else if ( computerChoice === "rock" && humanChoice === "scissors!" ) {
         console.log("You lose! Rock beats Scissors!");
-        return "loser";
+        computerScore++
+        // return "loser";
     } else if ( computerChoice === "paper" && humanChoice === "rock" ) {
         console.log("You lose! Paper beats Rock!");
-        return "loser";
+        computerScore++;
+        // return "loser";
     } else if ( computerChoice === "scissors" && humanChoice === "paper" ) {
         console.log("You lose! Scissors beats paper!");
-        return "loser";
+        computerScore++;
+        // return "loser";
     } else {
         console.log("Somehow you messed up!");
     }
 }
-
-let winnerOrLoser = playRound(humanChoice, computerChoice);
-
-// TODO: Increment score after a round is played
-// TODO: for some reason current computerChoice is getting stored into computerScore
-function adjustScore(winnerOrLoser, playerScore, computerScore) {
-    if ( winnerOrLoser === "winner" ) {
-        playerScore = playerScore + 1;
-        console.log("Since the Human won, the current score is: ");
-        console.log("Player's current score: ", playerScore);
-        console.log("Computer's current score: ", computerScore);
-    } else if ( winnerOrLoser === "loser" ) {
-        computerScore = computerScore + 1;
-        console.log("Since the Human lost, the current score is: ");
-        console.log("Player's current score: ", playerScore);
-        console.log("Computer's current score: ", computerScore);
-    } else {
-        console.log("Since it was a tie, the current score is: ");
-        console.log("Player score: ", playerScore);
-        console.log("Computer score: ", computerScore);
-    }
-}
-
-adjustScore(winnerOrLoser, playerScore, computerScore);
+    // function adjustScore(winnerOrLoser, playerScore, computerScore) {
+    //     if ( winnerOrLoser === "winner" ) {
+    //         playerScore++;
+    //         return playerScore;
+    //     } else if ( winnerOrLoser === "loser" ) {
+    //         computerScore++;
+    //         return computerScore;
+    //     } else {
+    //         console.log("Tie!");
+    //     }
+    // }
+let computerScore = 0;
+let playerScore = 0;
 
 
+    // let winnerOrLoser = playRound(humanChoice, computerChoice);
+    // adjustScore(winnerOrLoser, playerScore, computerScore);
+    console.log(playerScore);
+    console.log(computerScore);
+
+function playGame() {
+    let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
+    let computerChoice = getComputerChoice(getRandomInt(3));
+    playRound(humanChoice, computerChoice);
+ }   
+
+
+playGame();
+console.log("computerScore: ", computerScore);
+console.log("playerScore: ", playerScore);
+playGame();
+console.log("computerScore: ", computerScore);
+console.log("playerScore: ", playerScore);
+playGame();
+console.log("computerScore: ", computerScore);
+console.log("playerScore: ", playerScore);
+playGame();
+console.log("computerScore: ", computerScore);
+console.log("playerScore: ", playerScore);
+playGame();
+console.log("computerScore: ", computerScore);
+console.log("playerScore: ", playerScore);
