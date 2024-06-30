@@ -1,6 +1,3 @@
-//  test section
-
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -36,8 +33,6 @@ function getComputerChoice(randNum) {
     }
 }
 
-// TODO: Increment score after a round is played
-// TODO: for some reason current computerChoice is getting stored into computerScore
 function playRound(humanChoice, computerChoice) {
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
         console.log("Tie! Human and computer chose: Rock!");
@@ -47,8 +42,7 @@ function playRound(humanChoice, computerChoice) {
         console.log("Somehow you messed up.");
     } else if ( humanChoice === "rock" && computerChoice != "paper") {
         console.log("You win! Rock beats Scissors!");
-        playerScore++; // maybe i should return something then capture the value outside of the function
-        // return "winner";
+        playerScore++; 
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
         console.log("You win! Paper beats Rock!");
         playerScore++;
@@ -73,25 +67,9 @@ function playRound(humanChoice, computerChoice) {
         console.log("Somehow you messed up!");
     }
 }
-    // function adjustScore(winnerOrLoser, playerScore, computerScore) {
-    //     if ( winnerOrLoser === "winner" ) {
-    //         playerScore++;
-    //         return playerScore;
-    //     } else if ( winnerOrLoser === "loser" ) {
-    //         computerScore++;
-    //         return computerScore;
-    //     } else {
-    //         console.log("Tie!");
-    //     }
-    // }
+
 let computerScore = 0;
 let playerScore = 0;
-
-
-    // let winnerOrLoser = playRound(humanChoice, computerChoice);
-    // adjustScore(winnerOrLoser, playerScore, computerScore);
-    console.log(playerScore);
-    console.log(computerScore);
 
 function playGame() {
     let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
