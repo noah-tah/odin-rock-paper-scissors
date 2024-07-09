@@ -2,6 +2,17 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+function getComputerChoice(randNum) {
+    if (randNum === 0) {
+        return "rock";
+    } else if (randNum === 1) {
+        return "paper";
+    } else if (randNum === 2) {
+        return "scissors"
+     } else {
+        return;
+    }
+}
 function getHumanChoice(choice) {
     choice = choice.toLowerCase(); // convert choice to lowercase
     if (choice === "rock") {
@@ -15,17 +26,19 @@ function getHumanChoice(choice) {
     }
 }
 
-function getComputerChoice(randNum) {
-    if (randNum === 0) {
-        return "rock";
-    } else if (randNum === 1) {
-        return "paper";
-    } else if (randNum === 2) {
-        return "scissors"
-     } else {
-        return;
-    }
-}
+function initializeScoreboard() {
+    const scoreboard = document.querySelector(".results-container");
+    let displayPlayerScore = document.createElement("p");
+    displayPlayerScore.classList.add("player-score-display", "score-display-style", "game-font-style");
+    let displayComputerScore = document.createElement("p");
+    displayComputerScore.classList.add("computer-score-display", "score-display-style", "game-font-style");
+    displayPlayerScore.textContent = "The player's score is: " + playerScore;
+    displayComputerScore.textContent = "The computer's score is: " + playerScore;
+    scoreboard.appendChild(displayComputerScore);
+    scoreboard.appendChild(displayPlayerScore);
+};
+let computerScore = 0;
+let playerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
@@ -54,9 +67,6 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-let computerScore = 0;
-let playerScore = 0;
-
 
 function playGame() {
     let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
@@ -64,23 +74,4 @@ function playGame() {
     playRound(humanChoice, computerChoice);
 }   
 
-function initializeScoreboard() {
-
-    const scoreboard = document.querySelector(".results-container");
-
-    let displayPlayerScore = document.createElement("p");
-    displayPlayerScore.classList.add("player-score-display", "score-display-style", "game-font-style");
-
-    let displayComputerScore = document.createElement("p");
-    displayComputerScore.classList.add("computer-score-display", "score-display-style", "game-font-style");
-
-    displayPlayerScore.textContent = "The player's score is: " + playerScore;
-
-    displayComputerScore.textContent = "The computer's score is: " + playerScore;
-
-    scoreboard.appendChild(displayPlayerScore);
-    scoreboard.appendChild(displayComputerScore);
-    body.appendChild(scoreboard);
-
-};
 
