@@ -14,7 +14,7 @@ function getComputerChoice(randNum) {
     }
 }
 function initializeScoreboard() {
-    const scoreboardContainer = document.querySelector(".results-container");
+    const scoreboardContainer = document.querySelector(".scoreboard-container");
     let displayPlayerScore = document.createElement("p");
     displayPlayerScore.classList.add("player-score-display", "score-display-style", "game-font-style");
     let displayComputerScore = document.createElement("p");
@@ -40,6 +40,7 @@ function getHumanChoice() {
 
     rockButton.addEventListener("click", () => {
         humanChoice = "rock";
+        playRound();
     });
     paperButton.addEventListener("click", () => {
         humanChoice = "paper";
@@ -56,33 +57,56 @@ let computerScore = 0;
 let playerScore = 0;
 let scoreboard = initializeScoreboard();
 
-
+let gameResultText = "";
 
 function playRound() {
     let computerChoice = getComputerChoice(getRandomInt(3));
-    if ( humanChoice === "rock" && computerChoice === "rock" ) {
-        return;
-    } else if ( humanChoice ==="paper" && computerChoice === "paper" ) {
-        return;
-    } else if ( humanChoice ==="scissors" && computerChoice === "scissors" ) {
+    if ( humanChoice === computerChoice) {
+        gameResultText = "It's a tie!";
+        displayGameResult(gameResultText);
         return;
     } else if ( humanChoice === "rock" && computerChoice != "paper") {
         playerScore ++;
+        gameResultText = "You Win! Rock beats Paper!";
+        displayGameResult(gameResultText);
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
         playerScore++;
+        gameResultText = "You Win! Paper beats Scissors!!";
+        displayGameResult(gameResultText);
     } else if ( humanChoice === "scissors" && computerChoice != "rock" ) {
         playerScore++;
+        gameResultText = "You Win! Scissors beats Rock!";
+        displayGameResult(gameResultText);
     } else if ( computerChoice === "rock" && humanChoice === "scissors!" ) {
         computerScore++
+        gameResultText = "You Lose! Computer chose Rock!";
+        displayGameResult(gameResultText);
     } else if ( computerChoice === "paper" && humanChoice === "rock" ) {
         computerScore++;
+        gameResultText = "You Lose! Computer chose Paper!";
+        displayGameResult(gameResultText);
     } else if ( computerChoice === "scissors" && humanChoice === "paper" ) {
         computerScore++;
+        gameResultText = "You Lose! Computer chose Scissors!";
+        displayGameResult(gameResultText);
     } else {
+        gameResultText = "Something went wrong!";
+        displayGameResult(gameResultText);
         return;
     }
     updateScore(scoreboard);
 }
 
+function displayGameResult(gameResultText) {
+    const resultContainer = document.createElement('div');
+    resultContainer.classList.add("results-container");
+    let resultText = document.createElement('p');
+    resultText.classList.add("results-styles");
+    resultText.textContent = gameResultText;
+    resultContainer.appendChild(resultText);
+    document.body.appendChild(resultContainer);
+} 
+
+displayGameResult();
 
 
