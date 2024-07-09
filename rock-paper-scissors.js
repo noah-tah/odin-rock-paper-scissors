@@ -5,91 +5,82 @@ function getRandomInt(max) {
 function getHumanChoice(choice) {
     choice = choice.toLowerCase(); // convert choice to lowercase
     if (choice === "rock") {
-        console.log("You chose: Rock.")
         return "rock";
     } else if (choice === "paper") {
-        console.log("You chose: Paper.")
         return "paper";
     } else if (choice ===  "scissors") {
-        console.log("You chose: Scissors.");
         return "scissors";
     } else {
-        console.log("Invalid input! Please enter rock, paper, or scissors!");
+        return;
     }
 }
 
 function getComputerChoice(randNum) {
     if (randNum === 0) {
-        console.log("The computer chose: Rock.");
         return "rock";
     } else if (randNum === 1) {
-        console.log("The computer chose: Paper.");
         return "paper";
     } else if (randNum === 2) {
-        console.log("The computer chose: Scissors.");
         return "scissors"
      } else {
-        console.log("Somehow the computer choice function failed");
+        return;
     }
 }
 
 function playRound(humanChoice, computerChoice) {
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
-        console.log("Tie! Human and computer chose: Rock!");
+        // console.log("Tie! Human and computer chose: Rock!");
+        return;
     } else if ( humanChoice ==="paper" && computerChoice === "paper" ) {
-        console.log("Tie! Human and computer chose: Paper!");
+        // console.log("Tie! Human and computer chose: Paper!");
+        return;
     } else if ( humanChoice ==="scissors" && computerChoice === "scissors" ) {
-        console.log("Somehow you messed up.");
+        // console.log("Somehow you messed up.");
+        return;
     } else if ( humanChoice === "rock" && computerChoice != "paper") {
-        console.log("You win! Rock beats Scissors!");
         playerScore++; 
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
-        console.log("You win! Paper beats Rock!");
         playerScore++;
-        // return "winner";
     } else if ( humanChoice === "scissors" && computerChoice != "rock" ) {
-        console.log("You win! Scissors beats Paper!");
         playerScore++;
-        // return "winner";
     } else if ( computerChoice === "rock" && humanChoice === "scissors!" ) {
-        console.log("You lose! Rock beats Scissors!");
         computerScore++
-        // return "loser";
     } else if ( computerChoice === "paper" && humanChoice === "rock" ) {
-        console.log("You lose! Paper beats Rock!");
         computerScore++;
-        // return "loser";
     } else if ( computerChoice === "scissors" && humanChoice === "paper" ) {
-        console.log("You lose! Scissors beats paper!");
         computerScore++;
-        // return "loser";
     } else {
-        console.log("Somehow you messed up!");
+        return;
     }
 }
 
 let computerScore = 0;
 let playerScore = 0;
 
+
 function playGame() {
     let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
     let computerChoice = getComputerChoice(getRandomInt(3));
     playRound(humanChoice, computerChoice);
- }   
+}   
 
+function initializeScoreboard() {
 
-playGame();
-console.log("computerScore: ", computerScore);
-console.log("playerScore: ", playerScore);
-playGame();
-console.log("computerScore: ", computerScore);
-console.log("playerScore: ", playerScore);
-playGame();
-console.log("computerScore: ", computerScore);
-console.log("playerScore: ", playerScore);
-playGame();
-console.log("computerScore: ", computerScore);
-console.log("playerScore: ", playerScore);
-playGame();
-console.log("computerScore: ", computerScore);
-console.log("playerScore: ", playerScore);
+    const scoreboard = document.querySelector(".results-container");
+
+    let displayPlayerScore = document.createElement("p");
+    displayPlayerScore.classList.add("player-score-display", "score-display-style", "game-font-style");
+
+    let displayComputerScore = document.createElement("p");
+    displayComputerScore.classList.add("computer-score-display", "score-display-style", "game-font-style");
+
+    displayPlayerScore.textContent = "The player's score is: " + playerScore;
+
+    displayComputerScore.textContent = "The computer's score is: " + playerScore;
+
+    scoreboard.appendChild(displayPlayerScore);
+    scoreboard.appendChild(displayComputerScore);
+    body.appendChild(scoreboard);
+
+};
+
