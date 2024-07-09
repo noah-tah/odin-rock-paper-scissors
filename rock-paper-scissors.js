@@ -14,16 +14,24 @@ function getComputerChoice(randNum) {
     }
 }
 function initializeScoreboard() {
-    const scoreboard = document.querySelector(".results-container");
+    const scoreboardContainer = document.querySelector(".results-container");
     let displayPlayerScore = document.createElement("p");
     displayPlayerScore.classList.add("player-score-display", "score-display-style", "game-font-style");
     let displayComputerScore = document.createElement("p");
     displayComputerScore.classList.add("computer-score-display", "score-display-style", "game-font-style");
     displayPlayerScore.textContent = "The player's score is: " + playerScore;
     displayComputerScore.textContent = "The computer's score is: " + playerScore;
-    scoreboard.appendChild(displayComputerScore);
-    scoreboard.appendChild(displayPlayerScore);
-};
+    scoreboardContainer.appendChild(displayComputerScore);
+    scoreboardContainer.appendChild(displayPlayerScore);
+    const scoresArray = [displayComputerScore, displayPlayerScore];
+    return scoresArray;
+}
+
+function updateScore(scoresArray) {
+    scoresArray[0].textContent =  "The computer's score is: " + computerScore;
+    scoresArray[1].textContent = "The player's score is: " + playerScore;
+}
+
 let humanChoice = "";
 function getHumanChoice() {
     const rockButton = document.querySelector("#rock-button");
@@ -32,7 +40,6 @@ function getHumanChoice() {
 
     rockButton.addEventListener("click", () => {
         humanChoice = "rock";
-        playRound();
     });
     paperButton.addEventListener("click", () => {
         humanChoice = "paper";
@@ -43,26 +50,24 @@ function getHumanChoice() {
         playRound();
     });
 }
+
 getHumanChoice();
 let computerScore = 0;
 let playerScore = 0;
-initializeScoreboard();
+let scoreboard = initializeScoreboard();
 
 
 
 function playRound() {
     let computerChoice = getComputerChoice(getRandomInt(3));
-    console.log(humanChoice);
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
         return;
     } else if ( humanChoice ==="paper" && computerChoice === "paper" ) {
-        // console.log("Tie! Human and computer chose: Paper!");
         return;
     } else if ( humanChoice ==="scissors" && computerChoice === "scissors" ) {
-        // console.log("Somehow you messed up.");
         return;
     } else if ( humanChoice === "rock" && computerChoice != "paper") {
-        playerScore++; 
+        playerScore ++;
     } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
         playerScore++;
     } else if ( humanChoice === "scissors" && computerChoice != "rock" ) {
@@ -76,12 +81,8 @@ function playRound() {
     } else {
         return;
     }
+    updateScore(scoreboard);
 }
 
-// function playGame() {
-//     let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
-//     let computerChoice = getComputerChoice(getRandomInt(3));
-//     playRound(humanChoice, computerChoice);
-// }   
 
-// when a button is clicked, fire playRound();
+
