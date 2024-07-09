@@ -22,5 +22,4 @@ prompt user for input - getHumanChoice();
     function needs tpo jj
 convert input to lowercase
 
-so what should playGame() do?
-- 
+i need to think about how this game would actually work. So the button press should start a round, that button lcick must have an event listener which fires playround

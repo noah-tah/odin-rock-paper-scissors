@@ -13,18 +13,24 @@ function getComputerChoice(randNum) {
         return;
     }
 }
-function getHumanChoice(choice) {
-    choice = choice.toLowerCase(); // convert choice to lowercase
-    if (choice === "rock") {
+function getHumanChoice() {
+    const rockButton = document.querySelector("#rock-button");
+    const paperButton = document.querySelector("#paper-button");
+    const scissorsButton = document.querySelector("#scissors-button");
+
+    rockButton.addEventListener("click", () => {
         return "rock";
-    } else if (choice === "paper") {
+    });
+    paperButton.addEventListener("click", () => {
         return "paper";
-    } else if (choice ===  "scissors") {
+    });
+    scissorsButton.addEventListener("click", () => {
         return "scissors";
-    } else {
-        return;
-    }
+    });
 }
+
+let computerScore = 0;
+let playerScore = 0;
 
 function initializeScoreboard() {
     const scoreboard = document.querySelector(".results-container");
@@ -37,10 +43,9 @@ function initializeScoreboard() {
     scoreboard.appendChild(displayComputerScore);
     scoreboard.appendChild(displayPlayerScore);
 };
-let computerScore = 0;
-let playerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
+
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
         // console.log("Tie! Human and computer chose: Rock!");
         return;
@@ -67,11 +72,10 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-
 function playGame() {
     let humanChoice = getHumanChoice(prompt("Please choose rock, paper or scissors: "));
     let computerChoice = getComputerChoice(getRandomInt(3));
     playRound(humanChoice, computerChoice);
 }   
 
-
+// when a button is clicked, fire playRound();
