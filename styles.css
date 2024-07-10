@@ -17,6 +17,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 30px;
+    padding: 50px;
 }
 .scoreboard-container {
     display: flex;
@@ -66,8 +67,10 @@ h1 {
 
 .results-container {
     display:flex;
+    justify-content: center;
 }
 
 .results-styles {
     color: white;
+    font-size: 30px;
 }

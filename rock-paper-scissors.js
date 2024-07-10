@@ -19,8 +19,6 @@ function initializeScoreboard() {
     displayPlayerScore.classList.add("player-score-display", "score-display-style", "game-font-style");
     let displayComputerScore = document.createElement("p");
     displayComputerScore.classList.add("computer-score-display", "score-display-style", "game-font-style");
-    displayPlayerScore.textContent = "The player's score is: " + playerScore;
-    displayComputerScore.textContent = "The computer's score is: " + playerScore;
     scoreboardContainer.appendChild(displayComputerScore);
     scoreboardContainer.appendChild(displayPlayerScore);
     const scoresArray = [displayComputerScore, displayPlayerScore];
@@ -101,7 +99,7 @@ function displayGameResult(gameResultText) {
     const resultContainer = document.createElement('div');
     resultContainer.classList.add("results-container");
     let resultText = document.createElement('p');
-    resultText.classList.add("results-styles");
+    resultText.classList.add("results-styles", "game-font-style");
     resultText.textContent = gameResultText;
     resultContainer.appendChild(resultText);
     document.body.appendChild(resultContainer);
