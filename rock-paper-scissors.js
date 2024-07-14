@@ -9,7 +9,7 @@ function getComputerChoice(randNum) {
         return "paper";
     } else if (randNum === 2) {
         return "scissors"
-     } else {
+    } else {
         return;
     }
 }
@@ -26,25 +26,29 @@ function initializeScoreboard() {
 }
 
 function updateScore(scoresArray) {
-    scoresArray[0].textContent =  "The computer's score is: " + computerScore;
+    scoresArray[0].textContent = "The computer's score is: " + computerScore;
     scoresArray[1].textContent = "The player's score is: " + playerScore;
 }
 
 let humanChoice = "";
+
 function getHumanChoice() {
     const rockButton = document.querySelector("#rock-button");
     const paperButton = document.querySelector("#paper-button");
     const scissorsButton = document.querySelector("#scissors-button");
 
     rockButton.addEventListener("click", () => {
+        clearGameResult();
         humanChoice = "rock";
         playRound();
     });
     paperButton.addEventListener("click", () => {
+        clearGameResult();
         humanChoice = "paper";
         playRound();
     });
     scissorsButton.addEventListener("click", () => {
+        clearGameResult();
         humanChoice = "scissors";
         playRound();
     });
@@ -59,52 +63,69 @@ let gameResultText = "";
 
 function playRound() {
     let computerChoice = getComputerChoice(getRandomInt(3));
-    if ( humanChoice === computerChoice) {
+    if (humanChoice === computerChoice) {
         gameResultText = "It's a tie!";
         displayGameResult(gameResultText);
-        return;
-    } else if ( humanChoice === "rock" && computerChoice != "paper") {
-        playerScore ++;
+        updateScore(scoreboard);
+    } else if (humanChoice === "rock" && computerChoice === "scissors") {
+        playerScore++;
         gameResultText = "You Win! Rock beats Paper!";
         displayGameResult(gameResultText);
-    } else if ( humanChoice === "paper" && computerChoice != "scissors" ) {
+        updateScore(scoreboard);
+    } else if (humanChoice === "paper" && computerChoice === "rock") {
         playerScore++;
         gameResultText = "You Win! Paper beats Scissors!!";
         displayGameResult(gameResultText);
-    } else if ( humanChoice === "scissors" && computerChoice != "rock" ) {
+        updateScore(scoreboard);
+    } else if (humanChoice === "scissors" && computerChoice === "paper") {
         playerScore++;
         gameResultText = "You Win! Scissors beats Rock!";
         displayGameResult(gameResultText);
-    } else if ( computerChoice === "rock" && humanChoice === "scissors!" ) {
+        updateScore(scoreboard);
+    } else if (computerChoice === "rock" && humanChoice === "scissors") {
         computerScore++
         gameResultText = "You Lose! Computer chose Rock!";
         displayGameResult(gameResultText);
-    } else if ( computerChoice === "paper" && humanChoice === "rock" ) {
+        updateScore(scoreboard);
+    } else if (computerChoice === "paper" && humanChoice === "rock") {
         computerScore++;
         gameResultText = "You Lose! Computer chose Paper!";
         displayGameResult(gameResultText);
-    } else if ( computerChoice === "scissors" && humanChoice === "paper" ) {
+        updateScore(scoreboard);
+    } else if (computerChoice === "scissors" && humanChoice === "paper") {
         computerScore++;
         gameResultText = "You Lose! Computer chose Scissors!";
         displayGameResult(gameResultText);
+        updateScore(scoreboard);
     } else {
         gameResultText = "Something went wrong!";
         displayGameResult(gameResultText);
-        return;
+        updateScore(scoreboard);
     }
-    updateScore(scoreboard);
 }
 
 function displayGameResult(gameResultText) {
     const resultContainer = document.createElement('div');
     resultContainer.classList.add("results-container");
+    resultContainer.setAttribute("id", "results-container");
+    document.body.appendChild(resultContainer);
     let resultText = document.createElement('p');
     resultText.classList.add("results-styles", "game-font-style");
-    resultText.textContent = gameResultText;
+    resultText.setAttribute("id", "result-text");
     resultContainer.appendChild(resultText);
-    document.body.appendChild(resultContainer);
-} 
+    // }
+    resultText.textContent = gameResultText;
+}
 
-displayGameResult();
 
+function clearGameResult() {
+    let resultText = document.querySelector('#result-text');
+    if (resultText) {
+        resultText.textContent = '';
+    }
+    let resultContainer = document.querySelector(".results-container");
+    if (resultContainer) {
+        resultContainer.remove();
+    }
 
+}
