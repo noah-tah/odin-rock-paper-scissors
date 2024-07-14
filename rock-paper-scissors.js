@@ -1,3 +1,11 @@
+let humanChoice = "";
+let computerScore = 0;
+let playerScore = 0;
+let scoreboard = initializeScoreboard();
+let gameResultText = "";
+
+getHumanChoice();
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -30,7 +38,6 @@ function updateScore(scoresArray) {
     scoresArray[1].textContent = "The player's score is: " + playerScore;
 }
 
-let humanChoice = "";
 
 function getHumanChoice() {
     const rockButton = document.querySelector("#rock-button");
@@ -41,25 +48,30 @@ function getHumanChoice() {
         clearGameResult();
         humanChoice = "rock";
         playRound();
+        checkGameOver();
     });
     paperButton.addEventListener("click", () => {
         clearGameResult();
         humanChoice = "paper";
         playRound();
+        checkGameOver();
     });
     scissorsButton.addEventListener("click", () => {
         clearGameResult();
         humanChoice = "scissors";
         playRound();
+        checkGameOver();
     });
 }
 
-getHumanChoice();
-let computerScore = 0;
-let playerScore = 0;
-let scoreboard = initializeScoreboard();
 
-let gameResultText = "";
+function checkGameOver() {
+    if (playerScore === 5 || computerScore === 5) {
+        endGameScreen();
+    } else {
+        return
+    }
+}
 
 function playRound() {
     let computerChoice = getComputerChoice(getRandomInt(3));
@@ -69,17 +81,17 @@ function playRound() {
         updateScore(scoreboard);
     } else if (humanChoice === "rock" && computerChoice === "scissors") {
         playerScore++;
-        gameResultText = "You Win! Rock beats Paper!";
+        gameResultText = "You Win! Rock Computer chose Scissors!";
         displayGameResult(gameResultText);
         updateScore(scoreboard);
     } else if (humanChoice === "paper" && computerChoice === "rock") {
         playerScore++;
-        gameResultText = "You Win! Paper beats Scissors!!";
+        gameResultText = "You Win! Paper Computer chose Rock!";
         displayGameResult(gameResultText);
         updateScore(scoreboard);
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
         playerScore++;
-        gameResultText = "You Win! Scissors beats Rock!";
+        gameResultText = "You Win! Computer chose Paper!";
         displayGameResult(gameResultText);
         updateScore(scoreboard);
     } else if (computerChoice === "rock" && humanChoice === "scissors") {
@@ -116,7 +128,17 @@ function displayGameResult(gameResultText) {
     // }
     resultText.textContent = gameResultText;
 }
-
+function endGameScreen() {
+    const endGameTextContainer = document.createElement('div');
+    endGameTextContainer.classList.add("endGameTextContainer");
+    endGameTextContainer.setAttribute("id", "endGameTextContainer");
+    document.body.appendChild(endGameTextContainer);
+    let endGameText = document.createElement('p');
+    endGameText.classList.add("endGameText", "game-font-style");
+    endGameText.setAttribute("id", "endGameText");
+    endGameTextContainer.appendChild(endGameText);
+    endGameText.textContent = "5 rounds reached! Would you like to reset?";
+}
 
 function clearGameResult() {
     let resultText = document.querySelector('#result-text');
@@ -129,3 +151,5 @@ function clearGameResult() {
     }
 
 }
+
+
