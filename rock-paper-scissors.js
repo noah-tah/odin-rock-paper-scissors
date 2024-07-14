@@ -3,8 +3,9 @@ let computerScore = 0;
 let playerScore = 0;
 let scoreboard = initializeScoreboard();
 let gameResultText = "";
+let roundCount = "";
+let winnerText = "";
 
-checkGameOver();
 getHumanChoice();
 
 function getHumanChoice() {
@@ -91,6 +92,7 @@ function playRound() {
     } else {
         gameResultText = "Something went wrong!";
     }
+    roundCount++;
     displayGameResult(gameResultText);
     updateScore(scoreboard);
     checkGameOver();
@@ -105,7 +107,6 @@ function displayGameResult(gameResultText) {
     resultText.classList.add("results-styles", "game-font-style");
     resultText.setAttribute("id", "result-text");
     resultContainer.appendChild(resultText);
-    // }
     resultText.textContent = gameResultText;
 }
 
@@ -123,26 +124,36 @@ function clearGameResult() {
 }
 
 function checkGameOver() {
-    if (playerScore === 5 || computerScore === 5) {
-        endGameScreen();
+    if (roundCount === 5) {
+        checkWinner();
     } else {
         return
     }
 }
 
-function endGameScreen() {
-
-    const endGameTextContainer = document.createElement('div');
-    endGameTextContainer.classList.add("endGameTextContainer");
-    endGameTextContainer.setAttribute("id", "endGameTextContainer");
-    if (!endGameTextContainer) {
-        document.body.appendChild(endGameTextContainer);
-        let endGameText = document.createElement('p');
-        endGameText.classList.add("endGameText", "game-font-style");
-        endGameText.setAttribute("id", "endGameText");
-        endGameTextContainer.appendChild(endGameText);
-        endGameText.textContent = "5 rounds reached! Would you like to reset?";
+function checkWinner() {
+    if (playerScore > computerScore) {
+        winnerText = "You Won!";
+    } else if (playerScore < computerScore) {
+        winnerText = "You Lost!";
+    } else if (playerScore === computerScore) {
+        winnerText = "It's a tie!";
+    } else {
+        winnerText = "Something went wrong!";
     }
+    displayWinnerText();
+}
+
+function displayWinnerText() {
+    const winnerTextContainer = document.createElement('div');
+    winnerTextContainer.classList.add("winner-text-container");
+    winnerTextContainer.setAttribute("id", "winner-text-container");
+    document.body.appendChild(winnerTextContainer);
+    let winnerText = document.createElement('p');
+    winnerText.classList.add("winner-text", "game-font-style");
+    winnerText.setAttribute("id", "winner-text");
+    winnerTextContainer.appendChild(winnerText);
+    clearGameResult();
 }
 
 
