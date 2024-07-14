@@ -4,7 +4,32 @@ let playerScore = 0;
 let scoreboard = initializeScoreboard();
 let gameResultText = "";
 
+checkGameOver();
 getHumanChoice();
+
+function getHumanChoice() {
+    const rockButton = document.querySelector("#rock-button");
+    const paperButton = document.querySelector("#paper-button");
+    const scissorsButton = document.querySelector("#scissors-button");
+
+    rockButton.addEventListener("click", () => {
+        clearGameResult();
+        humanChoice = "rock";
+        playRound();
+    });
+    paperButton.addEventListener("click", () => {
+        clearGameResult();
+        humanChoice = "paper";
+        playRound();
+    });
+    scissorsButton.addEventListener("click", () => {
+        clearGameResult();
+        humanChoice = "scissors";
+        playRound();
+    });
+}
+
+
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -21,6 +46,7 @@ function getComputerChoice(randNum) {
         return;
     }
 }
+
 function initializeScoreboard() {
     const scoreboardContainer = document.querySelector(".scoreboard-container");
     let displayPlayerScore = document.createElement("p");
@@ -39,81 +65,35 @@ function updateScore(scoresArray) {
 }
 
 
-function getHumanChoice() {
-    const rockButton = document.querySelector("#rock-button");
-    const paperButton = document.querySelector("#paper-button");
-    const scissorsButton = document.querySelector("#scissors-button");
-
-    rockButton.addEventListener("click", () => {
-        clearGameResult();
-        humanChoice = "rock";
-        playRound();
-        checkGameOver();
-    });
-    paperButton.addEventListener("click", () => {
-        clearGameResult();
-        humanChoice = "paper";
-        playRound();
-        checkGameOver();
-    });
-    scissorsButton.addEventListener("click", () => {
-        clearGameResult();
-        humanChoice = "scissors";
-        playRound();
-        checkGameOver();
-    });
-}
-
-
-function checkGameOver() {
-    if (playerScore === 5 || computerScore === 5) {
-        endGameScreen();
-    } else {
-        return
-    }
-}
 
 function playRound() {
     let computerChoice = getComputerChoice(getRandomInt(3));
     if (humanChoice === computerChoice) {
         gameResultText = "It's a tie!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else if (humanChoice === "rock" && computerChoice === "scissors") {
         playerScore++;
         gameResultText = "You Win! Rock Computer chose Scissors!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else if (humanChoice === "paper" && computerChoice === "rock") {
         playerScore++;
         gameResultText = "You Win! Paper Computer chose Rock!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
         playerScore++;
         gameResultText = "You Win! Computer chose Paper!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else if (computerChoice === "rock" && humanChoice === "scissors") {
         computerScore++
         gameResultText = "You Lose! Computer chose Rock!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else if (computerChoice === "paper" && humanChoice === "rock") {
         computerScore++;
         gameResultText = "You Lose! Computer chose Paper!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else if (computerChoice === "scissors" && humanChoice === "paper") {
         computerScore++;
         gameResultText = "You Lose! Computer chose Scissors!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     } else {
         gameResultText = "Something went wrong!";
-        displayGameResult(gameResultText);
-        updateScore(scoreboard);
     }
+    displayGameResult(gameResultText);
+    updateScore(scoreboard);
+    checkGameOver();
 }
 
 function displayGameResult(gameResultText) {
@@ -128,17 +108,7 @@ function displayGameResult(gameResultText) {
     // }
     resultText.textContent = gameResultText;
 }
-function endGameScreen() {
-    const endGameTextContainer = document.createElement('div');
-    endGameTextContainer.classList.add("endGameTextContainer");
-    endGameTextContainer.setAttribute("id", "endGameTextContainer");
-    document.body.appendChild(endGameTextContainer);
-    let endGameText = document.createElement('p');
-    endGameText.classList.add("endGameText", "game-font-style");
-    endGameText.setAttribute("id", "endGameText");
-    endGameTextContainer.appendChild(endGameText);
-    endGameText.textContent = "5 rounds reached! Would you like to reset?";
-}
+
 
 function clearGameResult() {
     let resultText = document.querySelector('#result-text');
@@ -150,6 +120,29 @@ function clearGameResult() {
         resultContainer.remove();
     }
 
+}
+
+function checkGameOver() {
+    if (playerScore === 5 || computerScore === 5) {
+        endGameScreen();
+    } else {
+        return
+    }
+}
+
+function endGameScreen() {
+
+    const endGameTextContainer = document.createElement('div');
+    endGameTextContainer.classList.add("endGameTextContainer");
+    endGameTextContainer.setAttribute("id", "endGameTextContainer");
+    if (!endGameTextContainer) {
+        document.body.appendChild(endGameTextContainer);
+        let endGameText = document.createElement('p');
+        endGameText.classList.add("endGameText", "game-font-style");
+        endGameText.setAttribute("id", "endGameText");
+        endGameTextContainer.appendChild(endGameText);
+        endGameText.textContent = "5 rounds reached! Would you like to reset?";
+    }
 }
 
 
