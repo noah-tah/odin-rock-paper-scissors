@@ -63,6 +63,7 @@ function initializeScoreboard() {
 function updateScore(scoresArray) {
     scoresArray[0].textContent = "The computer's score is: " + computerScore;
     scoresArray[1].textContent = "The player's score is: " + playerScore;
+    checkGameOver();
 }
 
 
@@ -95,7 +96,6 @@ function playRound() {
     roundCount++;
     displayGameResult(gameResultText);
     updateScore(scoreboard);
-    checkGameOver();
 }
 
 function displayGameResult(gameResultText) {
@@ -122,10 +122,12 @@ function clearGameResult() {
     }
 
 }
-
+// implement resetScores() and returnButtons() and resetRoundCount()
 function checkGameOver() {
     if (roundCount === 5) {
         checkWinner();
+        clearGame();
+        createRetryButton();
     } else {
         return
     }
@@ -133,18 +135,20 @@ function checkGameOver() {
 
 function checkWinner() {
     if (playerScore > computerScore) {
-        winnerText = "You Won!";
+        winnerTextContent = "Game Over! You Won!";
     } else if (playerScore < computerScore) {
-        winnerText = "You Lost!";
+        winnerTextContent = "Game Over! You Lost!";
     } else if (playerScore === computerScore) {
-        winnerText = "It's a tie!";
+        winnerTextContent = "Game Over! It's a tie!";
     } else {
-        winnerText = "Something went wrong!";
+        winnerTextContent = "Something went wrong!";
     }
-    displayWinnerText();
+    displayWinnerText(winnerTextContent);
+
 }
 
-function displayWinnerText() {
+function displayWinnerText(winnerTextContent) {
+    clearGameResult();
     const winnerTextContainer = document.createElement('div');
     winnerTextContainer.classList.add("winner-text-container");
     winnerTextContainer.setAttribute("id", "winner-text-container");
@@ -152,8 +156,31 @@ function displayWinnerText() {
     let winnerText = document.createElement('p');
     winnerText.classList.add("winner-text", "game-font-style");
     winnerText.setAttribute("id", "winner-text");
+    winnerText.textContent = winnerTextContent;
     winnerTextContainer.appendChild(winnerText);
-    clearGameResult();
+
 }
 
+function clearGame() {
+    const rpsButtons = document.querySelector(".choice-container");
+    rpsButtons.remove();
+}
+
+function createRetryButton() {
+    const resultContainer = document.querySelector("#winner-text-container");
+    const retryButton = document.createElement('button');
+    retryButton.classList.add("game-font-style");
+    retryButton.setAttribute("id", "retry-button");
+    retryButton.textContent = "Retry?";
+    resultContainer.appendChild(retryButton);
+    retryButton.addEventListener("click", () => {
+        resetScores();
+    });
+}
+
+function resetScores() {
+    roundCount = 0;
+    [playerScore, computerScore] = [0, 0];
+    updateScore(scoreboard);
+}
 

@@ -8,7 +8,8 @@ h1 {
     color: white;
     font-size: 62px;
 }
-.top-container{
+
+.top-container {
     display: flex;
     justify-content: center;
 }
@@ -19,6 +20,7 @@ h1 {
     gap: 30px;
     padding: 50px;
 }
+
 .scoreboard-container {
     display: flex;
     flex-direction: column;
@@ -38,11 +40,11 @@ h1 {
 
 
 .rps-buttons {
-    padding-top:30px;
+    padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 50px;
     padding-right: 50px;
-    color:white;
+    color: white;
     font-size: 25px;
 }
 
@@ -57,20 +59,31 @@ h1 {
 #scissors-button {
     background-color: blue;
 }
-.game-font-style  {
-    font-family: "Pixelify Sans", sans-serif;
 
+.game-font-style {
+    font-family: "Pixelify Sans", sans-serif;
+    color: white;
 }
+
 .score-display-style {
     font-size: 20px;
 }
 
 .results-container {
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
-.results-styles {
-    color: white;
+#result-text {
     font-size: 30px;
+}
+
+#winner-text {
+    font-size: 30px;
+}
+
+#winner-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
