@@ -32,12 +32,9 @@ h1 {
     color: white;
 }
 
-
-
 .computer-score-display {
     color: white;
 }
-
 
 .rps-buttons {
     padding-top: 30px;
@@ -46,6 +43,10 @@ h1 {
     padding-right: 50px;
     color: white;
     font-size: 25px;
+}
+
+.rps-buttons:hover {
+    transform: scale(1.1);
 }
 
 #rock-button {
@@ -86,4 +87,23 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#retry-button {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: darkgray;
+    font-size: 25px;
+    color: red;
+}
+
+#retry-button:hover {
+    transform: scale(1.1);
+}
+
+#winner-text-container {
+    display: flex;
+    gap: 20px;
 }

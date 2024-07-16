@@ -116,7 +116,7 @@ function clearGameResult() {
     }
 
 }
-// implement resetScores() and returnButtons() and resetRoundCount()
+
 function checkGameOver() {
     if (roundCount === 5) {
         checkWinner();
