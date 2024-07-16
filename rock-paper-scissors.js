@@ -12,7 +12,6 @@ function getHumanChoice() {
     const rockButton = document.querySelector("#rock-button");
     const paperButton = document.querySelector("#paper-button");
     const scissorsButton = document.querySelector("#scissors-button");
-
     rockButton.addEventListener("click", () => {
         clearGameResult();
         humanChoice = "rock";
@@ -29,8 +28,6 @@ function getHumanChoice() {
         playRound();
     });
 }
-
-
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -65,8 +62,6 @@ function updateScore(scoresArray) {
     scoresArray[1].textContent = "The player's score is: " + playerScore;
     checkGameOver();
 }
-
-
 
 function playRound() {
     let computerChoice = getComputerChoice(getRandomInt(3));
@@ -110,7 +105,6 @@ function displayGameResult(gameResultText) {
     resultText.textContent = gameResultText;
 }
 
-
 function clearGameResult() {
     let resultText = document.querySelector('#result-text');
     if (resultText) {
@@ -126,7 +120,7 @@ function clearGameResult() {
 function checkGameOver() {
     if (roundCount === 5) {
         checkWinner();
-        clearGame();
+        disableButtons();
         createRetryButton();
     } else {
         return
@@ -144,7 +138,6 @@ function checkWinner() {
         winnerTextContent = "Something went wrong!";
     }
     displayWinnerText(winnerTextContent);
-
 }
 
 function displayWinnerText(winnerTextContent) {
@@ -161,11 +154,6 @@ function displayWinnerText(winnerTextContent) {
 
 }
 
-function clearGame() {
-    const rpsButtons = document.querySelector(".choice-container");
-    rpsButtons.remove();
-}
-
 function createRetryButton() {
     const resultContainer = document.querySelector("#winner-text-container");
     const retryButton = document.createElement('button');
@@ -175,6 +163,8 @@ function createRetryButton() {
     resultContainer.appendChild(retryButton);
     retryButton.addEventListener("click", () => {
         resetScores();
+        enableButtons();
+        clearScreen();
     });
 }
 
@@ -184,3 +174,26 @@ function resetScores() {
     updateScore(scoreboard);
 }
 
+function enableButtons() {
+    const buttons = document.querySelectorAll(".rps-buttons");
+    buttons.forEach(button => {
+        button.disabled = false;
+    });
+}
+
+function disableButtons() {
+    const buttons = document.querySelectorAll(".rps-buttons");
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+}
+
+function clearScreen() {
+    const resultContainer = document.querySelector(".winner-text-container");
+    const resultText = document.querySelector("#winner-text");
+    const retryButton = document.querySelector("#retry-button");
+    const resultsArray = [resultContainer, resultText, retryButton];
+    resultsArray.forEach(item => {
+        item.remove();
+    });
+}
